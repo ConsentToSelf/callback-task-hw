@@ -14,19 +14,23 @@ Callback должен принимать один элемент массива,
 */
 
 function every(arr, fn) {
-  if (!Array.isArray(arr) && typeof fn !== "function") {
-    console.log("dsds");
+  if (!Array.isArray(arr) || typeof fn !== "function") {
+    return new Error("с произвольным сообщением.");
   }
   let res = "";
   for (let i = 0; i < arr.length; i++) {
-    res += fn(arr[i]);
+    res = fn(arr[i]);
   }
   return res;
 }
 
 function everyCallback(elem) {
-  return elem * 2;
+  if (elem > 5) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-const result = every([1, 2, 6], everyCallback);
+const result = every([1, 2, 5], everyCallback);
 console.log(result);
